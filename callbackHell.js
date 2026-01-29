@@ -1,14 +1,21 @@
-function calculator(num1, num2, callback) {
+function fetchData(data, callback) {
+  // Takes 2 sec to fetch data
   setTimeout(() => {
-    callback(num1, num2);
-  }, 3000);
+    console.log("Data:" + data);
+    
+    if (callback) {
+      callback();
+    }
+  }, 2000);
 }
 
-// Calls calculator asynchronously (3s delay) to perform addition,
-// then calls it again to perform subtraction after the first finishes.
-calculator(1, 2, function (a, b) {
-  console.log("Addition:", a + b);
-  calculator(2, 1, function (a, b) {
-    console.log("Subtraction:", a - b);
+//? Callback Hell
+// callbacks inside callbacks inside callbacks
+//? How does callback hell occur
+// Because with callbacks, if you need to do things one after another, you must put the next task inside the previous callaback.
+
+fetchData("dataA", () => {
+  fetchData("dataB", () => {
+    fetchData("dataC");
   });
 });
